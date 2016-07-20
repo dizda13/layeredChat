@@ -51,8 +51,13 @@ public class ServerThred implements Runnable {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String clientData = "";
-            while((clientData = reader.readLine())!=null)
-            System.out.println(clientData);
+
+            String ip=socket.getInetAddress().getHostAddress();
+
+            while((clientData = reader.readLine())!=null) {
+                //ovdje bi trebao da spasis u bazu
+                System.out.println(clientData);
+            }
 
             System.out.println(disconnect());
         } catch (IOException e) {
