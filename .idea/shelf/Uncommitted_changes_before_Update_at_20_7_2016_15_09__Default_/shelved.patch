@@ -1,0 +1,30 @@
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(revision )
++++ .idea/vcs.xml	(revision )
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/java/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/Main.java	(revision 2b3c7b17351904f25c2b0959987bc74857514e96)
++++ src/main/java/Main.java	(revision )
+@@ -9,6 +9,7 @@
+         Scanner sc=new Scanner(System.in);
+         nesto=sc.next();
+         System.out.println(nesto);
++        System.out.println("hepek");
+ 
+     }
+ }
