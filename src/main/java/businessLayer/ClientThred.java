@@ -9,30 +9,57 @@ import java.util.Scanner;
 /**
  * Created by Dino on 19.7.2016.
  */
-public class ClientThred {
+public class ClientThred implements Runnable {
 
     String port;
     String ip;
     Socket socket;
+    String message;
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
 
     public ClientThred(){
      port=new String();
         ip=new String();
+        message= new String();
     }
     public ClientThred(String newPort, String newIP){
         port=newPort;
         ip=newIP;
+        //message=newMessage;
     }
 
-    public void changeIP(String newIP){
-        ip=newIP;
-    }
-
-    public void changePort(String newPort){
-        port=newPort;
-    }
 
     public String connect()  {
+        if(ip=="")
+            return "You didn't set IP adress";
+        if(port=="")
+            return "You didn't set port";
+
         try {
             socket = new Socket(ip, Integer.parseInt(port));
         }
@@ -52,20 +79,27 @@ public class ClientThred {
         return "Closed";
     }
 
-    public String sendLine(){
-        Scanner scan=new Scanner(System.in);
-        String line;
-        try {
-            line=scan.nextLine();
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    public String sendLine() {
+        if (socket.isConnected()) {
+            try {
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            out.println(line);
+                out.println(message);
 
-        } catch (IOException e) {
-            return e.getMessage();
+            } catch (IOException e) {
+                return e.getMessage();
+            }
+
+            return "Send";
         }
-
-        return "Send";
+        return "Not connected";
     }
+
+    public void run(){
+
+        System.out.println(sendLine());
+
+    }
+
 }

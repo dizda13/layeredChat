@@ -16,19 +16,40 @@ public class Main {
             String side=scan.nextLine();
             if(side=="c"){
                 System.out.println("Type ip adress and port number");
-                ClientThred cli=new ClientThred(scan.next(),scan.next());
+                String ip=scan.next();
+                String port=scan.next();
 
-                System.out.println(cli.connect());
-                System.out.println(cli.sendLine());
-                System.out.println(cli.disconnect());
+
+                ClientThred client=new ClientThred(ip,port);
+                System.out.println(client.connect());
+
+                System.out.println("Type -1 to stop sending messages");
+                System.out.println("Type text");
+                String message=scan.next();
+                while(message!="-1"){
+                    client.setMessage(message);
+
+                    Thread temp= new Thread(client);
+                    temp.start();
+
+                    message=scan.next();
+                }
+
+                System.out.println(client.disconnect());
 
                 break;
             }
             if(side=="s"){
                 System.out.println("Type port number");
                 ServerThred serv=new ServerThred(scan.next());
-                Thread someLine= new Thread(serv);
-                someLine.start();
+
+                String msg=serv.connect();
+                System.out.println(msg);
+                if(msg!="Connected") {
+                    Thread someLine = new Thread(serv);
+                    someLine.start();
+                }
+
                 break;
             }
             System.out.println("Its easy, just type c or s");

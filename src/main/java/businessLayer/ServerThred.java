@@ -19,20 +19,45 @@ public class ServerThred implements Runnable {
         this.port=port;
     }
 
-    public void run(){
+    public String connect()  {
+        if(port=="")
+            return "You didn't set port";
+
         try {
             server = new ServerSocket(Integer.parseInt(port));
             socket=server.accept();
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
-            String clientData = "";
-            clientData = reader.readLine();
-            System.out.println(clientData);
+            if(!socket.isConnected())
+                return  "Not connected";
+        }
+        catch(IOException e){
+            return e.getMessage();
+        }
+        return "Connected";
+    }
+
+    public String disconnect(){
+        try {
             //socket.close();
             server.close();
+        }
+        catch(IOException e){
+            return e.getMessage();
+        }
+        return "Closed";
+    }
+
+    public void run(){
+        try {
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String clientData = "";
+            while((clientData = reader.readLine())!=null)
+            System.out.println(clientData);
+
+            System.out.println(disconnect());
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
