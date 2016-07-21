@@ -28,7 +28,7 @@ public class ClientSide {
 
         final socketConection socket=new socketConection(ip,port);
         try {
-            socket.connect();
+            //socket.connect();
 
 
             final JSONparse parse=new JSONparse();
@@ -36,11 +36,13 @@ public class ClientSide {
                 Thread listen=new Thread(){
                     public void run(){
                         try {
-                            while(!socket.getSocket().isClosed()) {
-                                JSONObject writer = parse.fromJSON(socket.getSocket());
+                            while(true) {
 
-                                System.out.println("-" + writer.get("Username") + "-");
-                                System.out.println(writer.get("Message"));
+                                JSONObject writer = parse.fromJSON(socket.getSocket());
+                                if(writer!=null) {
+                                    System.out.println("-" + writer.get("Username") + "-");
+                                    System.out.println(writer.get("Message"));
+                                }
                             }
 
                         } catch (ExecutionException e) {
@@ -50,6 +52,7 @@ public class ClientSide {
                         }
                     }
                 };
+                listen.start();
             message=scan.nextLine();
             while(message!="-1"){
 

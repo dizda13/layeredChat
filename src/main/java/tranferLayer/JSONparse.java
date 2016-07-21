@@ -40,9 +40,19 @@ public class JSONparse {
 
         Future<String> future= single.submit(callable);
 
-        String returnMsg = future.get();
 
-        JSONObject json= new JSONObject(returnMsg);
+
+        String returnMsg="dino";
+
+        JSONObject json;
+
+        while(returnMsg==null) {
+            returnMsg = future.get();
+        }
+            json = new JSONObject(returnMsg);
+
+
+
 
         return json;
     }

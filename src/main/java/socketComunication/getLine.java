@@ -25,9 +25,10 @@ public class getLine implements Callable {
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String clientData;
 
-        //String ip=socket.getInetAddress().getHostAddress();
+        String ip=socket.getInetAddress().getHostAddress();
 
         clientData = reader.readLine();
+
         return clientData;
     }
 }
