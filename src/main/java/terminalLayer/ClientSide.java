@@ -28,7 +28,7 @@ public class ClientSide {
 
         final socketConection socket=new socketConection(ip,port);
         try {
-            //socket.connect();
+            socket.connect();
 
 
             final JSONparse parse=new JSONparse();
@@ -88,14 +88,14 @@ public class ClientSide {
 
                 System.out.println("Type -1 to stop sending messages");
                 System.out.println("Type text");
-                String message=scan.next();
-                while(message!="-1"){
-                    client.setMessage(message);
+                String ServerSide=scan.next();
+                while(ServerSide!="-1"){
+                    client.setMessage(ServerSide);
 
                     Thread temp= new Thread(client);
                     temp.start();
 
-                    message=scan.nextLine();
+                    ServerSide=scan.nextLine();
                 }
 
                 System.out.println(client.disconnect());

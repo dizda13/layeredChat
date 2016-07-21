@@ -1,6 +1,7 @@
 package tranferLayer;
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
@@ -11,6 +12,7 @@ public class socketConection {
     private String port;
     private String ip;
     private Socket socket;
+    private ServerSocket server;
 
     public String getPort() {
         return port;
@@ -41,6 +43,10 @@ public class socketConection {
         this.port=port;
     }
 
+    public socketConection(String port){
+        this.port=port;
+    }
+
     public String connect() throws IOException, IllegalArgumentException  {
         if(ip=="")
             throw new IllegalArgumentException("You didn't set IP adress");
@@ -52,9 +58,27 @@ public class socketConection {
         return "Connected";
     }
 
+    public String connectServer() throws IOException, IllegalArgumentException  {
+        if(port=="")
+            throw new IllegalArgumentException("You didn't set port");
+
+        server = new ServerSocket(Integer.parseInt(port));
+        socket=server.accept();
+        return "Connected";
+    }
+
+
+
     public String disconnect() throws IOException {
 
             socket.close();
+
+        return "Closed";
+    }
+
+    public String disconnectServer() throws IOException {
+
+        server.close();
 
         return "Closed";
     }
