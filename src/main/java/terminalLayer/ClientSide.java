@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by Dino on 19.7.2016.
  */
-public class Main {
+public class ClientSide {
     private static String message;
     public static void main(String[] args){
         Scanner scan=new Scanner(System.in);
@@ -81,7 +81,7 @@ public class Main {
             }
             if(side=="s"){
                 System.out.println("Type port number");
-                ServerThred serv=new ServerThred(scan.next());
+                getLine serv=new getLine(scan.next());
 
                 String msg=serv.connect();
                 System.out.println(msg);

@@ -36,7 +36,7 @@ public class sendLine implements Callable{
 
     public String call() throws Exception {
         if (socket.isConnected()) {
-                
+
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
