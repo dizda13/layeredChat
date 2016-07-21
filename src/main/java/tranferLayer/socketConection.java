@@ -52,5 +52,12 @@ public class socketConection {
         return "Connected";
     }
 
+    public String disconnect() throws IOException {
+
+            socket.close();
+
+        return "Closed";
+    }
+
 
 }
