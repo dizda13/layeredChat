@@ -10,14 +10,18 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args){
-        System.out.println("Do you want server side od client side c/s");
         Scanner scan=new Scanner(System.in);
+
+        System.out.println("Type ip");
+        String ip=new String(scan.nextLine());
+
+        System.out.println("Type port");
+        String port=new String(scan.nextLine());
+
         while(true){
             String side=scan.nextLine();
             if(side=="c"){
-                System.out.println("Type ip adress and port number");
-                String ip=scan.next();
-                String port=scan.next();
+
 
 
                 ClientThred client=new ClientThred(ip,port);
@@ -32,7 +36,7 @@ public class Main {
                     Thread temp= new Thread(client);
                     temp.start();
 
-                    message=scan.next();
+                    message=scan.nextLine();
                 }
 
                 System.out.println(client.disconnect());

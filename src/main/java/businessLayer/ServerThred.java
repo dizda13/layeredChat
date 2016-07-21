@@ -11,9 +11,9 @@ import java.net.Socket;
  */
 public class ServerThred implements Runnable {
 
-    ServerSocket server;
-    Socket socket;
-    String port;
+    private ServerSocket server;
+    private Socket socket;
+    private String port;
 
     public ServerThred(String port){
         this.port=port;

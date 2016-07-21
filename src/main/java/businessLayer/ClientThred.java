@@ -83,7 +83,7 @@ public class ClientThred implements Runnable {
         if (socket.isConnected()) {
             try {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 out.println(message);
 
