@@ -1,4 +1,4 @@
-package businessLayer;
+package socketComunication;
 
 import java.io.BufferedReader;
 import java.io.IOException;

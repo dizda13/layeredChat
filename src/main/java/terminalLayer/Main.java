@@ -1,7 +1,4 @@
-package presentationLayer;
-
-import businessLayer.ClientThred;
-import businessLayer.ServerThred;
+package terminalLayer;
 
 import java.util.Scanner;
 
@@ -18,7 +15,13 @@ public class Main {
         System.out.println("Type port");
         String port=new String(scan.nextLine());
 
+        String message=new String();
         while(true){
+            message=scan.nextLine();
+
+        }
+
+        /*while(true){
             String side=scan.nextLine();
             if(side=="c"){
 
@@ -57,7 +60,7 @@ public class Main {
                 break;
             }
             System.out.println("Its easy, just type c or s");
-        }
+        }*/
 
 
     }

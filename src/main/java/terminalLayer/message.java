@@ -1,4 +1,4 @@
-package presentationLayer;
+package terminalLayer;
 
 /**
  * Created by Dino on 20.7.2016.

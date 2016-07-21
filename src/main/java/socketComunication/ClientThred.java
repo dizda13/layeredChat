@@ -1,10 +1,7 @@
-package businessLayer;
+package socketComunication;
 
 import java.io.*;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Scanner;
 
 /**
  * Created by Dino on 19.7.2016.
