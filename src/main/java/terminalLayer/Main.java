@@ -1,5 +1,9 @@
 package terminalLayer;
 
+import tranferLayer.JSONparse;
+import tranferLayer.socketConection;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -15,14 +19,20 @@ public class Main {
         System.out.println("Type port");
         String port=new String(scan.nextLine());
 
+        socketConection socket=new socketConection(ip,port);
+        try {
+            socket.connect();
 
 
-        String message=new String();
-        while(true){
-            message=scan.nextLine();
-
+            String message=new String();
+            JSONparse parse=new JSONparse();
+            while(message!="-1"){
+                message=scan.nextLine();
+                parse.toJSON(message, socket.getSocket());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-
         /*while(true){
             String side=scan.nextLine();
             if(side=="c"){
