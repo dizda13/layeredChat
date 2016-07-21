@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="chat-socket" />
+        <module name="chatLayered" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="chat-socket" target="1.5" />
+      <module name="chatLayered" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -4,17 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>chat</groupId>
-    <artifactId>chat-socket</artifactId>
+    <groupId>Chat-socket</groupId>
+    <artifactId>chatLayered</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-<dependencies>
-    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-    <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.3</version>
-    </dependency>
+    <dependencies>
 
-</dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160212</version>
+        </dependency>
+
+    </dependencies>
+
 </project>
