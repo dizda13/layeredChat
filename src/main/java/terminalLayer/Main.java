@@ -43,7 +43,7 @@ public class Main {
 
 
 
-                ClientThred client=new ClientThred(ip,port);
+                sendLine client=new sendLine(ip,port);
                 System.out.println(client.connect());
 
                 System.out.println("Type -1 to stop sending messages");

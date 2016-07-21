@@ -1,10 +1,11 @@
 package tranferLayer;
 
 import org.json.JSONObject;
-import org.json.simple.JSONObject;
+import socketComunication.sendLine;
 
 import java.net.Socket;
 import java.util.Map;
+import java.util.concurrent.*;
 
 /**
  * Created by Dino on 21.7.2016.
@@ -15,16 +16,21 @@ public class JSONparse {
 
     }
 
-    public String toJSON(String msg, String user , Socket socket){
+    public String toJSON(String msg, String user , Socket socket) throws ExecutionException, InterruptedException {
         //JSONObject neki;
         String jsonStr=new String("{\"Username\":\""+user+"\",\"Message\":\""+msg+"\"}");
-        Map<String,String> mapa=new Map;
+
 
         //JSONObject neki=new JSONObject(jsonStr);
 
-        
+        ExecutorService single = Executors.newSingleThreadExecutor();
+        Callable<String> callable=new sendLine(socket,msg);
 
-        return "a";
+        Future<String> future= single.submit(callable);
+
+        String returnMsg= future.get();
+
+        return returnMsg;
     }
 
     public String fromJSON(String msg, Socket socket){
