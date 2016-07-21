@@ -39,10 +39,10 @@ public class ClientSide {
                             while(true) {
 
                                 JSONObject writer = parse.fromJSON(socket.getSocket());
-                                if(writer!=null) {
-                                    System.out.println("-" + writer.get("Username") + "-");
-                                    System.out.println(writer.get("Message"));
-                                }
+
+                                System.out.println("-" + writer.get("Username") + "-");
+                                System.out.println(writer.get("Message"));
+
                             }
 
                         } catch (ExecutionException e) {

@@ -5,7 +5,6 @@ import socketComunication.getLine;
 import socketComunication.sendLine;
 
 import java.net.Socket;
-import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -48,6 +47,7 @@ public class JSONparse {
 
         while(returnMsg==null) {
             returnMsg = future.get();
+            Thread.sleep(1000);
         }
             json = new JSONObject(returnMsg);
 
