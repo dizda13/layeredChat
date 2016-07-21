@@ -15,6 +15,8 @@ public class Main {
         System.out.println("Type port");
         String port=new String(scan.nextLine());
 
+
+
         String message=new String();
         while(true){
             message=scan.nextLine();

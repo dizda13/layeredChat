@@ -2,6 +2,7 @@ package socketComunication;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 /**
  * Created by Dino on 19.7.2016.
@@ -59,6 +60,7 @@ public class ClientThred implements Runnable {
 
         try {
             socket = new Socket(ip, Integer.parseInt(port));
+
         }
         catch(IOException e){
             return e.getMessage();
