@@ -26,7 +26,7 @@ public class Database {
 
 
     // USPOSTAVLJANJE KONEKCIJE SA BAZOM
-    
+
     public void start() {
         if(conn == null) {
             try {
@@ -49,22 +49,19 @@ public class Database {
     public void create() {
         if(conn!=null) {
             try {
-                System.out.println("Creating statement...");
                 stmt = conn.createStatement();
                 String sql;
-                sql = "CREATE TABLE IF NOT EXISTS`"+ DBNAME +"`.`poruke1` "+
+                sql = "CREATE TABLE IF NOT EXISTS`socketchat`.`poruke` "+
                         "(`id` INT NOT NULL AUTO_INCREMENT,"+
                         "`user` VARCHAR(45) NOT NULL,"+
                         "`poruka` VARCHAR(144) NOT NULL,"+
                         "PRIMARY KEY (`id`));";
                 stmt.executeUpdate(sql);
-                System.out.println("Created table in given database...");
+                System.out.println("Created table in database");
                 IsTableCreated = true;
             }catch(SQLException se){
-
                 se.printStackTrace();
             }catch(Exception e){
-
                 e.printStackTrace();
             }
         }
