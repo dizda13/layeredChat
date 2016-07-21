@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="80945e69-024f-4fd0-b5c0-d235b543f34c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/terminalLayer/ClientSide.java" afterPath="$PROJECT_DIR$/src/main/java/terminalLayer/ClientSide.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/terminalLayer/ServerSide.java" afterPath="$PROJECT_DIR$/src/main/java/terminalLayer/ServerSide.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tranferLayer/JSONparse.java" afterPath="$PROJECT_DIR$/src/main/java/tranferLayer/JSONparse.java" />
     </list>
     <ignored path="chatLayered.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -757,7 +754,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
