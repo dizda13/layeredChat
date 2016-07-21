@@ -13,6 +13,9 @@ public class Main {
     public static void main(String[] args){
         Scanner scan=new Scanner(System.in);
 
+        System.out.println("Type username");
+        String user=new String(scan.nextLine());
+
         System.out.println("Type ip");
         String ip=new String(scan.nextLine());
 
@@ -26,9 +29,10 @@ public class Main {
 
             String message=new String();
             JSONparse parse=new JSONparse();
+            message=scan.nextLine();
             while(message!="-1"){
+                parse.toJSON(message, user ,socket.getSocket());
                 message=scan.nextLine();
-                parse.toJSON(message, socket.getSocket());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
