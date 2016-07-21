@@ -1,6 +1,7 @@
 package tranferLayer;
 
 import org.json.JSONObject;
+import socketComunication.getLine;
 import socketComunication.sendLine;
 
 import java.net.Socket;
@@ -33,7 +34,16 @@ public class JSONparse {
         return returnMsg;
     }
 
-    public String fromJSON(String msg, Socket socket){
-        return "a";
+    public JSONObject fromJSON(Socket socket) throws ExecutionException, InterruptedException {
+        ExecutorService single = Executors.newSingleThreadExecutor();
+        Callable<String> callable=new getLine(socket);
+
+        Future<String> future= single.submit(callable);
+
+        String returnMsg = future.get();
+
+        JSONObject json= new JSONObject(returnMsg);
+
+        return json;
     }
 }

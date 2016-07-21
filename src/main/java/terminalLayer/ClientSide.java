@@ -1,9 +1,11 @@
 package terminalLayer;
 
+import org.json.JSONObject;
 import tranferLayer.JSONparse;
 import tranferLayer.socketConection;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
@@ -26,15 +28,32 @@ public class ClientSide {
 
         final socketConection socket=new socketConection(ip,port);
         try {
-            //socket.connect();
-
+            socket.connect();
 
 
             final JSONparse parse=new JSONparse();
+
+                Thread listen=new Thread(){
+                    public void run(){
+                        try {
+                            while(!socket.getSocket().isClosed()) {
+                                JSONObject writer = parse.fromJSON(socket.getSocket());
+
+                                System.out.println("-" + writer.get("Username") + "-");
+                                System.out.println(writer.get("Message"));
+                            }
+
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
             message=scan.nextLine();
             while(message!="-1"){
 
-                Thread tre= new Thread() {
+                Thread write= new Thread() {
                     public void run()
 
                     {
@@ -47,9 +66,10 @@ public class ClientSide {
                         }
                     }
                 };
-                tre.start();
+                write.start();
                 message=scan.nextLine();
             }
+            socket.disconnect();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
