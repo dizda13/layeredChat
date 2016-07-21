@@ -4,7 +4,11 @@ package databaseLayer;
  * Created by belmin on 21.07.2016..
  */
 
+
+import org.json.JSONObject;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class Database {
@@ -13,6 +17,7 @@ public class Database {
     static String USER ="root";
     static String PASS ="1234";
     static Boolean IsTableCreated = true; //  PROMIJENITI VRIJEDNOST NA FALSE
+
 
 
 
@@ -87,6 +92,7 @@ public class Database {
     // ISPISIVANJE SVIH PORUKA
     public void dajPoruke() {
         if(conn!=null) {
+            ArrayList<MsgToDb> poruke = new ArrayList<MsgToDb>();
             try {
                 stmt = conn.createStatement();
                 String sql;
@@ -97,9 +103,9 @@ public class Database {
                     String user  = rs.getString("user");
                     String poruka = rs.getString("poruka");
 
-                    System.out.println("Poslao: " + user);
-                    System.out.println("Poruka: " + poruka);
+                    poruke.add(new MsgToDb(user,poruka));
                 }
+                // return poruke;
                 rs.close();
                 stmt.close();
                 conn.close();
