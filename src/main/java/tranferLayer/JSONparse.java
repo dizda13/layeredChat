@@ -48,6 +48,7 @@ public class JSONparse {
         while(returnMsg==null) {
             returnMsg = future.get();
             Thread.sleep(1000);
+
         }
             json = new JSONObject(returnMsg);
 
