@@ -111,7 +111,6 @@ public class Database {
         }
     }
 
-
     // DODAVANJE PREKIDANJE KONEKCIJE
     public void stop() {
         if (conn != null) {
@@ -130,7 +129,7 @@ public class Database {
             }
         }
         conn = null;
-        System.out.println("Doviđenja!");
+        // System.out.println("Doviđenja!");
 
     }
 }
