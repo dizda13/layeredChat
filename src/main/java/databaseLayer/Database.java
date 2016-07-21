@@ -72,52 +72,40 @@ public class Database {
     public void addMsg(String sender, String msg) {
         if(conn!=null && IsTableCreated == true) {
             try {
-                System.out.println("Inserting records into the table...");
                 stmt = conn.createStatement();
-
                 String sql = "INSERT INTO poruke (user, poruka) VALUES (\"" + sender+"\",\"" + msg + "\")";
                 stmt.executeUpdate(sql);
                 System.out.println("Inserted records into the table...");
             }catch(SQLException se){
-
                 se.printStackTrace();
             }catch(Exception e){
-
                 e.printStackTrace();
             }
         }
     }
 
-
     // ISPISIVANJE SVIH PORUKA
     public void dajPoruke() {
         if(conn!=null) {
             try {
-                System.out.println("Creating statement...");
                 stmt = conn.createStatement();
                 String sql;
                 sql = "SELECT user, poruka FROM poruke";
                 ResultSet rs = stmt.executeQuery(sql);
 
-
                 while(rs.next()){
-
                     String user  = rs.getString("user");
                     String poruka = rs.getString("poruka");
-
 
                     System.out.println("Poslao: " + user);
                     System.out.println("Poruka: " + poruka);
                 }
-
                 rs.close();
                 stmt.close();
                 conn.close();
             }catch(SQLException se){
-
                 se.printStackTrace();
             }catch(Exception e){
-
                 e.printStackTrace();
             }
         }
