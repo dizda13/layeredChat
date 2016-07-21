@@ -28,7 +28,7 @@ public class JSONparse {
 
         Future<String> future= single.submit(callable);
 
-        String returnMsg= future.get();
+        String returnMsg = future.get();
 
         return returnMsg;
     }

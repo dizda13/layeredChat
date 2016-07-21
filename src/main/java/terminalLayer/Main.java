@@ -5,37 +5,54 @@ import tranferLayer.socketConection;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Dino on 19.7.2016.
  */
 public class Main {
+    private static String message;
     public static void main(String[] args){
         Scanner scan=new Scanner(System.in);
 
         System.out.println("Type username");
-        String user=new String(scan.nextLine());
+        final String user=new String(scan.nextLine());
 
         System.out.println("Type ip");
-        String ip=new String(scan.nextLine());
+        final String ip=new String(scan.nextLine());
 
         System.out.println("Type port");
-        String port=new String(scan.nextLine());
+        final String port=new String(scan.nextLine());
 
-        socketConection socket=new socketConection(ip,port);
+        final socketConection socket=new socketConection(ip,port);
         try {
-            socket.connect();
+            //socket.connect();
 
 
-            String message=new String();
-            JSONparse parse=new JSONparse();
+
+            final JSONparse parse=new JSONparse();
             message=scan.nextLine();
             while(message!="-1"){
-                parse.toJSON(message, user ,socket.getSocket());
+
+                Thread tre= new Thread() {
+                    public void run()
+
+                    {
+                        try {
+                            System.out.println(parse.toJSON(message, user, socket.getSocket()));
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                tre.start();
                 message=scan.nextLine();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         /*while(true){
             String side=scan.nextLine();
