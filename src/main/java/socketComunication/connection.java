@@ -20,12 +20,15 @@ public class connection {
     //String msg;
     Socket socket;
     JSONparse json;
+    Thread lisener;
+    Boolean connected=false;
 
     public connection(String ip, String port, JSONparse json) throws IOException {
         this.ip=ip;
         this.port=port;
         this.json=json;
         socket=new Socket(ip, Integer.parseInt(port));
+        connected=true;
         Thread lisener=new Thread(new reciver());
         lisener.start();
         json.sendStatus("Connected");
@@ -37,13 +40,14 @@ public class connection {
         this.json=json;
         ServerSocket server=new ServerSocket(Integer.parseInt(port));
         socket=server.accept();
-        Thread lisener=new Thread(new reciver());
+        connected=true;
+        lisener=new Thread(new reciver());
         lisener.start();
         json.sendStatus("Connected");
     }
 
     public void sendLine(String msg){
-        if(!socket.isClosed()) {
+        if(connected) {
             try {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 out.println(msg);
@@ -58,21 +62,25 @@ public class connection {
 
     }
 
+    public void closeConnection() throws IOException {
+        connected=false;
+    }
+
     public class reciver implements Runnable{
 
         public void run() {
             while (true) {
-                if(socket.isConnected()) {
-                    String clientData = "dino";
+                BufferedReader reader;
+                if(connected) {
+                    String clientData;
                     try {
-
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-                        //String ip=socket.getInetAddress().getHostAddress();
+                        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                         clientData = reader.readLine();
+
                         if (clientData != null)
                             json.fromJSON(clientData);
+
 
                     } catch (IOException e) {
                         json.sendStatus(e.getMessage());

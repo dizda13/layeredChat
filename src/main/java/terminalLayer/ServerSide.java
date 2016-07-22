@@ -19,21 +19,21 @@ public class ServerSide extends abstractSide {
         String port=new String(scan.nextLine());
 
 
-        JSONparse input= null;
         try {
-            input = new JSONparse(port,user,this);
+            JSONparse input = new JSONparse(port,user,this);
+
+            String message="";
+            while(!message.equals("-1")) {
+
+                message = new String(scan.nextLine());
+                input.toJSON(message);
+            }
+            input.close();
         } catch (IOException e) {
             e.printStackTrace();
             printStatus(e.getMessage());
         }
 
-        while(true) {
-            System.out.println("Type message");
-            String message = new String(scan.nextLine());
-
-            input.toJSON(message);
-
-        }
 
     }
 

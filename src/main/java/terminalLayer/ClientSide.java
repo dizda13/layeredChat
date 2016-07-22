@@ -24,16 +24,16 @@ public class ClientSide extends abstractSide {
         String port=new String(scan.nextLine());
 
 
-        JSONparse input=null;
         try {
-            input = new JSONparse(ip,port,user,this);
+            JSONparse input = new JSONparse(ip,port,user,this);
 
-
-        while(true) {
-            System.out.println("Type message");
-            String message = new String(scan.nextLine());
-                input.toJSON(message);
-        }
+            String message="";
+            while(!message.equals("-1")) {
+                System.out.println("Type message/ -1 close");
+                message = new String(scan.nextLine());
+                    input.toJSON(message);
+            }
+            input.close();
         } catch (IOException e) {
             printStatus(e.getMessage());
         }

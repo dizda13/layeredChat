@@ -30,5 +30,6 @@ public class Main {
             }
             System.out.println("Type just c or s");
         }
+        return ;
     }
 }

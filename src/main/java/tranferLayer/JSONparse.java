@@ -51,4 +51,8 @@ public class JSONparse {
     public void sendStatus(String status){
         client.printStatus(status);
     }
+
+    public void close() throws IOException {
+        socket.closeConnection();
+    }
 }
