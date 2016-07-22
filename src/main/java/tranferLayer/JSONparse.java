@@ -1,9 +1,13 @@
 package tranferLayer;
 
+import com.sun.deploy.util.SessionState;
 import org.json.JSONObject;
+import socketComunication.connection;
 import socketComunication.getLine;
 import socketComunication.sendLine;
+import terminalLayer.ClientSide;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.*;
 
@@ -12,25 +16,26 @@ import java.util.concurrent.*;
  */
 public class JSONparse {
 
-    public JSONparse(){
+    //String msg;
+    String ip;
+    String port;
+    String user;
+    ClientSide client;
 
+    public JSONparse(String ip, String port, String user,ClientSide client){
+        this.ip=ip;
+        this.port=port;
+        this.user=user;
+        this.client=client;
     }
 
-    public String toJSON(String msg, String user , Socket socket) throws ExecutionException, InterruptedException {
-        //JSONObject neki;
+    public void toJSON(String msg) throws ExecutionException, InterruptedException, IOException {
         String jsonStr=new String("{\"Username\":\""+user+"\",\"Message\":\""+msg+"\"}");
 
+        connection socket=new connection(ip,port,this);
 
-        //JSONObject neki=new JSONObject(jsonStr);
+        socket.sendLine(jsonStr);
 
-        ExecutorService single = Executors.newSingleThreadExecutor();
-        Callable<String> callable=new sendLine(socket,msg);
-
-        Future<String> future= single.submit(callable);
-
-        String returnMsg = future.get();
-
-        return returnMsg;
     }
 
     public JSONObject fromJSON(Socket socket) throws ExecutionException, InterruptedException {
