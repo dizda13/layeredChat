@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutionException;
 
@@ -28,8 +29,18 @@ public class connection {
         json.sendStatus("Connected");
     }
 
+    public connection(String port, JSONparse json) throws IOException {
+
+        this.port=port;
+        this.json=json;
+        ServerSocket server=new ServerSocket(Integer.parseInt(port));
+        socket=server.accept();
+        json.sendStatus("Connected");
+    }
 
     public void sendLine(String msg){
+        Thread lisener=new Thread(new reciver());
+        lisener.start();
         try {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println(msg);

@@ -30,10 +30,20 @@ public class JSONparse {
         this.client=client;
     }
 
+    public JSONparse(String port, String user, abstractSide client){
+        this.ip="";
+        this.port=port;
+        this.user=user;
+        this.client=client;
+    }
+
     public void toJSON(String msg) throws ExecutionException, InterruptedException, IOException {
         String jsonStr=new String("{\"Username\":\""+user+"\",\"Message\":\""+msg+"\"}");
-
-        connection socket=new connection(ip,port,this);
+        connection socket;
+        if(ip=="")
+            socket =new connection(ip,port,this);
+        else
+            socket=new connection(port,this);
 
         socket.sendLine(jsonStr);
 

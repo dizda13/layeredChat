@@ -18,14 +18,11 @@ public class ServerSide extends abstractSide {
         System.out.println("Type username");
         String user=new String(scan.nextLine());
 
-        System.out.println("Type ip");
-        String ip=new String(scan.nextLine());
-
         System.out.println("Type port");
         String port=new String(scan.nextLine());
 
 
-        JSONparse input=new JSONparse(ip,port,user,this);
+        JSONparse input=new JSONparse(port,user,this);
 
         while(true) {
             System.out.println("Type message");
