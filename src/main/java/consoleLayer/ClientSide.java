@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class ClientSide implements IConsoleLayer {
     private ITransferLayer iTransferLayer;
 
-    public void setiTransferLayer(ITransferLayer iTransferLayer){
+    public void setITransferLayer(ITransferLayer iTransferLayer){
         this.iTransferLayer=iTransferLayer;
     }
 
@@ -30,20 +30,18 @@ public class ClientSide implements IConsoleLayer {
         System.out.println("Type port");
         String port=new String(scan.nextLine());
 
-
         try {
-            JSONtranslator input=new JSONtranslator();
+            iTransferLayer.sendConectionParamtars(ip,port);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            String message="";
-            while(!message.equals("-1")) {
+        String message = "";
+            while (!message.equals("-1")) {
                 System.out.println("Type message/ -1 close");
                 message = new String(scan.nextLine());
-                    input.toJSON(message);
+                iTransferLayer.toJSON(user, message);
             }
-            input.close();
-        } catch (IOException e) {
-            printStatus(e.getMessage());
-        }
 
     }
 

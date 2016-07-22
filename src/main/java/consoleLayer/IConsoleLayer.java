@@ -9,5 +9,5 @@ public interface IConsoleLayer {
     public void printStatus(String status);
     public void printMsg(String username, String msg);
     public void inputData();
-    public void setiTransferLayer(ITransferLayer iTransferLayer);
+    public void setITransferLayer(ITransferLayer iTransferLayer);
 }

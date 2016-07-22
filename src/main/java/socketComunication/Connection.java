@@ -1,5 +1,6 @@
 package socketComunication;
 
+import tranferLayer.ITransferLayer;
 import tranferLayer.JSONtranslator;
 
 import java.io.BufferedReader;
@@ -12,37 +13,20 @@ import java.net.Socket;
 /**
  * Created by Dino on 22.7.2016.
  */
-public class Connection {
+public class Connection implements  ISocketComunication {
+
+    private ITransferLayer iTransferLayer;
 
     private String ip;
     private String port;
-    //String msg;
     private Socket socket;
-    private JSONtranslator json;
     private Thread lisener;
     private Boolean connected=false;
 
-    public Connection(String ip, String port, JSONtranslator json) throws IOException {
-        this.ip=ip;
-        this.port=port;
-        this.json=json;
-        socket=new Socket(ip, Integer.parseInt(port));
-        connected=true;
-        Thread lisener=new Thread(new reciver());
-        lisener.start();
-        json.sendStatus("Connected");
-    }
 
     public Connection(String port, JSONtranslator json) throws IOException {
 
-        this.port=port;
-        this.json=json;
-        ServerSocket server=new ServerSocket(Integer.parseInt(port));
-        socket=server.accept();
-        connected=true;
-        lisener=new Thread(new reciver());
-        lisener.start();
-        json.sendStatus("Connected");
+
     }
 
     public void sendLine(String msg){
@@ -52,9 +36,9 @@ public class Connection {
                 out.println(msg);
                 out.flush();
 
-                json.sendStatus("Sent");
+                iTransferLayer.sendStatus("Sent");
             } catch (IOException e) {
-                json.sendStatus(e.getMessage());
+                iTransferLayer.sendStatus(e.getMessage());
 
             }
         }
@@ -63,6 +47,24 @@ public class Connection {
 
     public void closeConnection() throws IOException {
         connected=false;
+    }
+
+    public void setConnectionParametars(String ip, String port) throws IOException {
+        this.ip=ip;
+        this.port=port;
+        connect();
+    }
+
+    public void setITransferLayer(ITransferLayer iTransferLayer) {
+        this.iTransferLayer=iTransferLayer;
+    }
+
+    public void connect() throws IOException {
+        socket=new Socket(ip, Integer.parseInt(port));
+        connected=true;
+        lisener=new Thread(new reciver());
+        lisener.start();
+        iTransferLayer.sendStatus("Connected");
     }
 
     public class reciver implements Runnable{
@@ -78,22 +80,13 @@ public class Connection {
                         clientData = reader.readLine();
 
                         if (clientData != null)
-                            json.fromJSON(clientData);
+                            iTransferLayer.fromJSON(clientData);
 
 
                     } catch (IOException e) {
-                        json.sendStatus(e.getMessage());
+                        iTransferLayer.sendStatus(e.getMessage());
                         e.printStackTrace();
                     }
-                }else{
-
-                    try {
-                        socket.close();
-                        break;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
 
                 }
             }

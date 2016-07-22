@@ -25,13 +25,6 @@ public class JSONtranslator implements ITransferLayer {
 
     }
 
-    public JSONtranslator(String ip, String port, String user, abstractSide client) throws IOException {
-        this.ip=ip;
-        this.port=port;
-        this.user=user;
-        this.client=client;
-        socket =new Connection(ip,port,this);
-    }
 
     public JSONtranslator(String port, String user, abstractSide client) throws IOException {
         this.ip="";
@@ -44,17 +37,17 @@ public class JSONtranslator implements ITransferLayer {
     public void toJSON(String msg, String user) {
         String jsonStr=new String("{\"Username\":\""+user+"\",\"Message\":\""+msg+"\"}");
 
-        socket.sendLine(jsonStr);
+        iSocketComunication.sendLine(jsonStr);
 
     }
 
     public void fromJSON(String jsonMsg) {
         JSONObject json = new JSONObject(jsonMsg);
-        client.printMsg(json.getString("Username"),json.getString("Message"));
+        iConsoleLayer.printMsg(json.getString("Username"),json.getString("Message"));
     }
 
     public void sendStatus(String status){
-        client.printStatus(status);
+        iConsoleLayer.printStatus(status);
     }
 
     public void setIConsoleLayer(IConsoleLayer iConsoleLayer) {
@@ -65,7 +58,8 @@ public class JSONtranslator implements ITransferLayer {
         this.iSocketComunication=iSocketComunication;
     }
 
-    public void close() throws IOException {
-        socket.closeConnection();
+    public void sendConectionParamtars(String ip, String port) throws IOException {
+        iSocketComunication.setConnectionParametars(ip,port);
     }
+
 }
