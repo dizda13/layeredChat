@@ -15,7 +15,7 @@ public class Main {
         System.out.println("Are you server or socket c/s");
         String chouseSide=scan.next();
         abstractSide side;
-        //while(true){
+        while(true){
             System.out.println(chouseSide);
             if(chouseSide.equals("c")) {
                 System.out.println("doslo");
@@ -45,6 +45,6 @@ public class Main {
                 //break;
             }
             System.out.println("Type just c or s");
-        //}
+        }
     }
 }
