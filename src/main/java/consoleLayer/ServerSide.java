@@ -1,7 +1,7 @@
 package consoleLayer;
 
 import tranferLayer.ITransferLayer;
-import tranferLayer.JSONtranslator;
+
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -44,7 +44,6 @@ public class ServerSide implements IConsoleLayer {
     }
 
 
-    }
 
     public void printMsg(String username, String msg){
         System.out.println("-" + username + "-");

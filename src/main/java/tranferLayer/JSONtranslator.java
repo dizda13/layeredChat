@@ -2,8 +2,6 @@ package tranferLayer;
 
 import consoleLayer.IConsoleLayer;
 import org.json.JSONObject;
-import socketComunication.Connection;
-import consoleLayer.abstractSide;
 import socketComunication.ISocketComunication;
 
 import java.io.IOException;
@@ -14,25 +12,12 @@ import java.io.IOException;
 public class JSONtranslator implements ITransferLayer {
     IConsoleLayer iConsoleLayer;
     ISocketComunication iSocketComunication;
-    //String msg;
-    private String ip;
-    private String port;
-    private String user;
-    private abstractSide client;
-    private Connection socket;
+
 
     public JSONtranslator(){
 
     }
 
-
-    public JSONtranslator(String port, String user, abstractSide client) throws IOException {
-        this.ip="";
-        this.port=port;
-        this.user=user;
-        this.client=client;
-        socket =new Connection(port,this);
-    }
 
     public void toJSON(String msg, String user) {
         String jsonStr=new String("{\"Username\":\""+user+"\",\"Message\":\""+msg+"\"}");
@@ -60,6 +45,10 @@ public class JSONtranslator implements ITransferLayer {
 
     public void sendConectionParamtars(String ip, String port) throws IOException {
         iSocketComunication.setConnectionParametars(ip,port);
+    }
+
+    public void sendConectionParamtars(String port) throws IOException {
+        iSocketComunication.setConnectionParametars(port);
     }
 
 }

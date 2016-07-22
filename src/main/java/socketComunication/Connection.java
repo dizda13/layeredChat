@@ -1,7 +1,6 @@
 package socketComunication;
 
 import tranferLayer.ITransferLayer;
-import tranferLayer.JSONtranslator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,10 +22,43 @@ public class Connection implements  ISocketComunication {
     private Thread lisener;
     private Boolean connected=false;
 
+    public void setITransferLayer(ITransferLayer iTransferLayer) {
+        this.iTransferLayer=iTransferLayer;
+    }
 
-    public Connection(String port, JSONtranslator json) throws IOException {
+    public void setConnectionParametars(String port) throws IOException {
+        this.port=port;
+        connectServer();
+    }
+
+    public void setConnectionParametars(String ip, String port) throws IOException {
+        this.ip=ip;
+        this.port=port;
+        connect();
+    }
 
 
+    public void closeConnection() throws IOException {
+        connected=false;
+    }
+
+
+
+    public void connectServer() throws IOException {
+        ServerSocket server = new ServerSocket(Integer.parseInt(port));
+        socket=server.accept();
+        connected=true;
+        lisener=new Thread(new reciver());
+        lisener.start();
+        iTransferLayer.sendStatus("Connected");
+    }
+
+    public void connect() throws IOException {
+        socket=new Socket(ip, Integer.parseInt(port));
+        connected=true;
+        lisener=new Thread(new reciver());
+        lisener.start();
+        iTransferLayer.sendStatus("Connected");
     }
 
     public void sendLine(String msg){
@@ -45,27 +77,6 @@ public class Connection implements  ISocketComunication {
 
     }
 
-    public void closeConnection() throws IOException {
-        connected=false;
-    }
-
-    public void setConnectionParametars(String ip, String port) throws IOException {
-        this.ip=ip;
-        this.port=port;
-        connect();
-    }
-
-    public void setITransferLayer(ITransferLayer iTransferLayer) {
-        this.iTransferLayer=iTransferLayer;
-    }
-
-    public void connect() throws IOException {
-        socket=new Socket(ip, Integer.parseInt(port));
-        connected=true;
-        lisener=new Thread(new reciver());
-        lisener.start();
-        iTransferLayer.sendStatus("Connected");
-    }
 
     public class reciver implements Runnable{
 

@@ -1,9 +1,7 @@
 package consoleLayer;
 
-import org.json.JSONObject;
-import socketComunication.ISocketComunication;
 import tranferLayer.ITransferLayer;
-import tranferLayer.JSONtranslator;
+
 
 import java.io.IOException;
 import java.util.Scanner;
