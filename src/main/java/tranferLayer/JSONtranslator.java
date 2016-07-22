@@ -10,8 +10,8 @@ import java.io.IOException;
  * Created by Dino on 21.7.2016.
  */
 public class JSONtranslator implements ITransferLayer {
-    IConsoleLayer iConsoleLayer;
-    ISocketComunication iSocketComunication;
+    private IConsoleLayer iConsoleLayer;
+    private ISocketComunication iSocketComunication;
 
     public void setIConsoleLayer(IConsoleLayer iConsoleLayer) {
         this.iConsoleLayer=iConsoleLayer;

@@ -10,6 +10,7 @@ import java.util.Scanner;
  * Created by Dino on 19.7.2016.
  */
 public class ClientSide implements IConsoleLayer {
+
     private ITransferLayer iTransferLayer;
 
     public void setITransferLayer(ITransferLayer iTransferLayer){
