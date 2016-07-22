@@ -12,9 +12,9 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by Dino on 19.7.2016.
  */
-public class ClientSide {
+public class ClientSide extends abstractSide {
 
-    public void inputData(){
+    public void inputData() throws InterruptedException, ExecutionException, IOException {
         Scanner scan=new Scanner(System.in);
 
         System.out.println("Type username");
@@ -32,6 +32,7 @@ public class ClientSide {
         while(true) {
             System.out.println("Type message");
             String message = new String(scan.nextLine());
+            input.toJSON(message);
             try {
                 input.toJSON(message);
             } catch (ExecutionException e) {

@@ -4,76 +4,52 @@ import org.json.JSONObject;
 import tranferLayer.JSONparse;
 import tranferLayer.socketConection;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Dino on 20.7.2016.
  */
-public class ServerSide {
-    private static String message;
-
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+public class ServerSide extends abstractSide {
+    public void inputData() throws InterruptedException, ExecutionException, IOException {
+        Scanner scan=new Scanner(System.in);
 
         System.out.println("Type username");
-        final String user = new String(scan.nextLine());
+        String user=new String(scan.nextLine());
 
+        System.out.println("Type ip");
+        String ip=new String(scan.nextLine());
 
         System.out.println("Type port");
-        final String port = new String(scan.nextLine());
-
-        final socketConection socket = new socketConection(port);
-        try {
-            socket.connectServer();
+        String port=new String(scan.nextLine());
 
 
-            final JSONparse parse = new JSONparse();
+        JSONparse input=new JSONparse(ip,port,user,this);
 
-            Thread listen = new Thread() {
-                public void run() {
-                    try {
-                        while (true) {
-
-                            JSONObject writer = parse.fromJSON(socket.getSocket());
-
-                            if (writer != null) {
-                                System.out.println("-" + writer.get("Username") + "-");
-                                System.out.println(writer.get("Message"));
-                            }
-                        }
-
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-            listen.start();
-            message = scan.nextLine();
-            while (message != "-1") {
-
-                Thread write = new Thread() {
-                    public void run()
-
-                    {
-                        try {
-                            System.out.println(parse.toJSON(message, user, socket.getSocket()));
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                write.start();
-                message = scan.nextLine();
+        while(true) {
+            System.out.println("Type message");
+            String message = new String(scan.nextLine());
+            input.toJSON(message);
+            try {
+                input.toJSON(message);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            socket.disconnectServer();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
         }
+
+    }
+
+    public void printMsg(String username, String msg){
+        System.out.println("-" + username + "-");
+        System.out.println(msg);
+    }
+
+    public void printStatus(String status){
+        System.out.println(status);
     }
 }

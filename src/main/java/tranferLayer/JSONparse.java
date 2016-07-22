@@ -6,6 +6,7 @@ import socketComunication.connection;
 import socketComunication.getLine;
 import socketComunication.sendLine;
 import terminalLayer.ClientSide;
+import terminalLayer.abstractSide;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -20,9 +21,9 @@ public class JSONparse {
     String ip;
     String port;
     String user;
-    ClientSide client;
+    abstractSide client;
 
-    public JSONparse(String ip, String port, String user,ClientSide client){
+    public JSONparse(String ip, String port, String user, abstractSide client){
         this.ip=ip;
         this.port=port;
         this.user=user;
@@ -38,28 +39,12 @@ public class JSONparse {
 
     }
 
-    public JSONObject fromJSON(Socket socket) throws ExecutionException, InterruptedException {
-        ExecutorService single = Executors.newSingleThreadExecutor();
-        Callable<String> callable=new getLine(socket);
+    public void fromJSON(String jsonMsg) throws ExecutionException, InterruptedException {
+        JSONObject json = new JSONObject(jsonMsg);
+        client.printMsg(json.getString("Username"),json.getString("Message"));
+    }
 
-        Future<String> future= single.submit(callable);
-
-
-
-        String returnMsg="dino";
-
-        JSONObject json;
-
-        while(returnMsg==null) {
-            returnMsg = future.get();
-            Thread.sleep(1000);
-
-        }
-            json = new JSONObject(returnMsg);
-
-
-
-
-        return json;
+    public void sendStatus(String status){
+        client.printStatus(status);
     }
 }
