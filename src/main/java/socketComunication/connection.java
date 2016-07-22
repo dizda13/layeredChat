@@ -50,7 +50,7 @@ public class connection {
 
             json.sendStatus("Sent");
         } catch (IOException e) {
-            e.printStackTrace();
+            json.sendStatus(e.getMessage());
 
         }
 
@@ -71,11 +71,7 @@ public class connection {
                         json.fromJSON(clientData);
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    json.sendStatus(e.getMessage());
                 }
             }
 

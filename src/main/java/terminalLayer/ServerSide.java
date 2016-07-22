@@ -1,18 +1,15 @@
 package terminalLayer;
 
-import org.json.JSONObject;
 import tranferLayer.JSONparse;
-import tranferLayer.socketConection;
 
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Dino on 20.7.2016.
  */
 public class ServerSide extends abstractSide {
-    public void inputData() throws InterruptedException, ExecutionException, IOException {
+    public void inputData() {
         Scanner scan=new Scanner(System.in);
 
         System.out.println("Type username");
@@ -22,20 +19,19 @@ public class ServerSide extends abstractSide {
         String port=new String(scan.nextLine());
 
 
-        JSONparse input=new JSONparse(port,user,this);
+        JSONparse input= null;
+        try {
+            input = new JSONparse(port,user,this);
+        } catch (IOException e) {
+            printStatus(e.getMessage());
+        }
 
         while(true) {
             System.out.println("Type message");
             String message = new String(scan.nextLine());
-            try {
-                input.toJSON(message);
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            input.toJSON(message);
+
         }
 
     }

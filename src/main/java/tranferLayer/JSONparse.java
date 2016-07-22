@@ -1,15 +1,10 @@
 package tranferLayer;
 
-import com.sun.deploy.util.SessionState;
 import org.json.JSONObject;
 import socketComunication.connection;
-import socketComunication.getLine;
-import socketComunication.sendLine;
-import terminalLayer.ClientSide;
 import terminalLayer.abstractSide;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.util.concurrent.*;
 
 /**
@@ -40,14 +35,14 @@ public class JSONparse {
         socket =new connection(port,this);
     }
 
-    public void toJSON(String msg) throws ExecutionException, InterruptedException, IOException {
+    public void toJSON(String msg) {
         String jsonStr=new String("{\"Username\":\""+user+"\",\"Message\":\""+msg+"\"}");
 
         socket.sendLine(jsonStr);
 
     }
 
-    public void fromJSON(String jsonMsg) throws ExecutionException, InterruptedException {
+    public void fromJSON(String jsonMsg) {
         JSONObject json = new JSONObject(jsonMsg);
         client.printMsg(json.getString("Username"),json.getString("Message"));
         //client.printMsg(user,jsonMsg);

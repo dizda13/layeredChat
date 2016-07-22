@@ -18,29 +18,15 @@ public class Main {
         while(true){
             if(chouseSide.equals("c")) {
                 side = new ClientSide();
-                try {
-                    side.inputData();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                //break;
+
+                side.inputData();
+                break;
             }
             if(chouseSide.equals("s")){
                 side = new ServerSide();
-                try {
-                    side.inputData();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                //break;
+
+                side.inputData();
+                break;
             }
             System.out.println("Type just c or s");
         }
