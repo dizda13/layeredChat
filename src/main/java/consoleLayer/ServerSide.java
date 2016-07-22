@@ -1,6 +1,6 @@
-package terminalLayer;
+package consoleLayer;
 
-import tranferLayer.JSONparse;
+import tranferLayer.JSONtranslator;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -20,7 +20,7 @@ public class ServerSide extends abstractSide {
 
 
         try {
-            JSONparse input = new JSONparse(port,user,this);
+            JSONtranslator input = new JSONtranslator(port,user,this);
 
             String message="";
             while(!message.equals("-1")) {

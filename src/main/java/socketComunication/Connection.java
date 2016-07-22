@@ -1,6 +1,6 @@
 package socketComunication;
 
-import tranferLayer.JSONparse;
+import tranferLayer.JSONtranslator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,22 +8,21 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Dino on 22.7.2016.
  */
-public class connection {
+public class Connection {
 
-    String ip;
-    String port;
+    private String ip;
+    private String port;
     //String msg;
-    Socket socket;
-    JSONparse json;
-    Thread lisener;
-    Boolean connected=false;
+    private Socket socket;
+    private JSONtranslator json;
+    private Thread lisener;
+    private Boolean connected=false;
 
-    public connection(String ip, String port, JSONparse json) throws IOException {
+    public Connection(String ip, String port, JSONtranslator json) throws IOException {
         this.ip=ip;
         this.port=port;
         this.json=json;
@@ -34,7 +33,7 @@ public class connection {
         json.sendStatus("Connected");
     }
 
-    public connection(String port, JSONparse json) throws IOException {
+    public Connection(String port, JSONtranslator json) throws IOException {
 
         this.port=port;
         this.json=json;

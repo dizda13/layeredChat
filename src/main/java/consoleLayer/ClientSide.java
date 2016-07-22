@@ -1,15 +1,22 @@
-package terminalLayer;
+package consoleLayer;
 
-import tranferLayer.JSONparse;
+import org.json.JSONObject;
+import socketComunication.ISocketComunication;
+import tranferLayer.ITransferLayer;
+import tranferLayer.JSONtranslator;
 
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Dino on 19.7.2016.
  */
-public class ClientSide extends abstractSide {
+public class ClientSide implements IConsoleLayer {
+    private ITransferLayer iTransferLayer;
+
+    public void setiTransferLayer(ITransferLayer iTransferLayer){
+        this.iTransferLayer=iTransferLayer;
+    }
 
     public void inputData() {
         Scanner scan=new Scanner(System.in);
@@ -25,7 +32,7 @@ public class ClientSide extends abstractSide {
 
 
         try {
-            JSONparse input = new JSONparse(ip,port,user,this);
+            JSONtranslator input=new JSONtranslator();
 
             String message="";
             while(!message.equals("-1")) {
