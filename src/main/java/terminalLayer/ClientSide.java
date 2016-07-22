@@ -27,14 +27,15 @@ public class ClientSide extends abstractSide {
         JSONparse input=null;
         try {
             input = new JSONparse(ip,port,user,this);
-        } catch (IOException e) {
-            printStatus(e.getMessage());
-        }
+
 
         while(true) {
             System.out.println("Type message");
             String message = new String(scan.nextLine());
                 input.toJSON(message);
+        }
+        } catch (IOException e) {
+            printStatus(e.getMessage());
         }
 
     }

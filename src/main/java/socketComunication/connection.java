@@ -43,15 +43,17 @@ public class connection {
     }
 
     public void sendLine(String msg){
-        try {
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(msg);
-            out.flush();
+        if(!socket.isClosed()) {
+            try {
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                out.println(msg);
+                out.flush();
 
-            json.sendStatus("Sent");
-        } catch (IOException e) {
-            json.sendStatus(e.getMessage());
+                json.sendStatus("Sent");
+            } catch (IOException e) {
+                json.sendStatus(e.getMessage());
 
+            }
         }
 
     }
@@ -59,19 +61,33 @@ public class connection {
     public class reciver implements Runnable{
 
         public void run() {
-            while(true){
-                String clientData="dino";
-                try {
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            while (true) {
+                if(socket.isConnected()) {
+                    String clientData = "dino";
+                    try {
 
-                    //String ip=socket.getInetAddress().getHostAddress();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                    while(clientData!=null) {
+                        //String ip=socket.getInetAddress().getHostAddress();
+
                         clientData = reader.readLine();
-                        json.fromJSON(clientData);
+                        if (clientData != null)
+                            json.fromJSON(clientData);
+
+                    } catch (IOException e) {
+                        json.sendStatus(e.getMessage());
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    json.sendStatus(e.getMessage());
+                }else{
+
+                    try {
+                        socket.close();
+                        break;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
                 }
             }
 

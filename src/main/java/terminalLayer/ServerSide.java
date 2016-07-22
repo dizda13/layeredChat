@@ -23,6 +23,7 @@ public class ServerSide extends abstractSide {
         try {
             input = new JSONparse(port,user,this);
         } catch (IOException e) {
+            e.printStackTrace();
             printStatus(e.getMessage());
         }
 
