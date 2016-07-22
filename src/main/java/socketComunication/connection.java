@@ -26,6 +26,8 @@ public class connection {
         this.port=port;
         this.json=json;
         socket=new Socket(ip, Integer.parseInt(port));
+        Thread lisener=new Thread(new reciver());
+        lisener.start();
         json.sendStatus("Connected");
     }
 
@@ -35,12 +37,12 @@ public class connection {
         this.json=json;
         ServerSocket server=new ServerSocket(Integer.parseInt(port));
         socket=server.accept();
+        Thread lisener=new Thread(new reciver());
+        lisener.start();
         json.sendStatus("Connected");
     }
 
     public void sendLine(String msg){
-        Thread lisener=new Thread(new reciver());
-        lisener.start();
         try {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println(msg);

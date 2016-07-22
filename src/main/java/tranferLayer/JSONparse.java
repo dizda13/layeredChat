@@ -22,28 +22,26 @@ public class JSONparse {
     String port;
     String user;
     abstractSide client;
+    connection socket;
 
-    public JSONparse(String ip, String port, String user, abstractSide client){
+    public JSONparse(String ip, String port, String user, abstractSide client) throws IOException {
         this.ip=ip;
         this.port=port;
         this.user=user;
         this.client=client;
+        socket =new connection(ip,port,this);
     }
 
-    public JSONparse(String port, String user, abstractSide client){
+    public JSONparse(String port, String user, abstractSide client) throws IOException {
         this.ip="";
         this.port=port;
         this.user=user;
         this.client=client;
+        socket =new connection(port,this);
     }
 
     public void toJSON(String msg) throws ExecutionException, InterruptedException, IOException {
         String jsonStr=new String("{\"Username\":\""+user+"\",\"Message\":\""+msg+"\"}");
-        connection socket;
-        if(ip=="")
-            socket =new connection(ip,port,this);
-        else
-            socket=new connection(port,this);
 
         socket.sendLine(jsonStr);
 
