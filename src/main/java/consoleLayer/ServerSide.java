@@ -1,5 +1,6 @@
 package consoleLayer;
 
+import com.mysql.cj.fabric.Server;
 import tranferLayer.ITransferLayer;
 
 
@@ -17,6 +18,9 @@ public class ServerSide implements IConsoleLayer {
         this.iTransferLayer=iTransferLayer;
     }
 
+    public ServerSide(){
+
+    }
 
     public void inputData() {
         Scanner scan=new Scanner(System.in);

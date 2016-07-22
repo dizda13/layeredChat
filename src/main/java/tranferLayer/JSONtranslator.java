@@ -13,9 +13,28 @@ public class JSONtranslator implements ITransferLayer {
     IConsoleLayer iConsoleLayer;
     ISocketComunication iSocketComunication;
 
+    public void setIConsoleLayer(IConsoleLayer iConsoleLayer) {
+        this.iConsoleLayer=iConsoleLayer;
+    }
+
+    public void setISocketComunication(ISocketComunication iSocketComunication) {
+        this.iSocketComunication=iSocketComunication;
+    }
 
     public JSONtranslator(){
 
+    }
+
+    public void sendConectionParamtars(String ip, String port) throws IOException {
+        iSocketComunication.setConnectionParametars(ip,port);
+    }
+
+    public void sendConectionParamtars(String port) throws IOException {
+        iSocketComunication.setConnectionParametars(port);
+    }
+
+    public void sendStatus(String status){
+        iConsoleLayer.printStatus(status);
     }
 
 
@@ -31,24 +50,6 @@ public class JSONtranslator implements ITransferLayer {
         iConsoleLayer.printMsg(json.getString("Username"),json.getString("Message"));
     }
 
-    public void sendStatus(String status){
-        iConsoleLayer.printStatus(status);
-    }
 
-    public void setIConsoleLayer(IConsoleLayer iConsoleLayer) {
-        this.iConsoleLayer=iConsoleLayer;
-    }
-
-    public void setISocketComunication(ISocketComunication iSocketComunication) {
-        this.iSocketComunication=iSocketComunication;
-    }
-
-    public void sendConectionParamtars(String ip, String port) throws IOException {
-        iSocketComunication.setConnectionParametars(ip,port);
-    }
-
-    public void sendConectionParamtars(String port) throws IOException {
-        iSocketComunication.setConnectionParametars(port);
-    }
 
 }

@@ -26,6 +26,10 @@ public class Connection implements  ISocketComunication {
         this.iTransferLayer=iTransferLayer;
     }
 
+    public Connection(){
+
+    }
+
     public void setConnectionParametars(String port) throws IOException {
         this.port=port;
         connectServer();

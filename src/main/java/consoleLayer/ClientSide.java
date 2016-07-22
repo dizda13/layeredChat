@@ -16,6 +16,10 @@ public class ClientSide implements IConsoleLayer {
         this.iTransferLayer=iTransferLayer;
     }
 
+    public ClientSide(){
+
+    }
+
     public void inputData() {
         Scanner scan=new Scanner(System.in);
 

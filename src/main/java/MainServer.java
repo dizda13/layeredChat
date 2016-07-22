@@ -1,4 +1,3 @@
-import consoleLayer.ClientSide;
 import consoleLayer.IConsoleLayer;
 import consoleLayer.ServerSide;
 import socketComunication.Connection;
@@ -12,9 +11,9 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by Dino on 22.7.2016.
  */
-public class MainClient {
+public class MainServer {
     public static void main(String[] args) throws InterruptedException, ExecutionException, IOException {
-        IConsoleLayer iConsoleLayer=new ClientSide();
+        IConsoleLayer iConsoleLayer=new ServerSide();
         ITransferLayer iTransferLayer=new JSONtranslator();
         ISocketComunication iSocketComunication=new Connection();
 
