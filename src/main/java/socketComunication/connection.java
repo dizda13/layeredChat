@@ -46,6 +46,8 @@ public class connection {
         try {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println(msg);
+            out.flush();
+
             json.sendStatus("Sent");
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,10 +66,10 @@ public class connection {
 
                     //String ip=socket.getInetAddress().getHostAddress();
 
-                    while(clientData==null) {
+                    while(clientData!=null) {
                         clientData = reader.readLine();
+                        json.fromJSON(clientData);
                     }
-                    json.fromJSON(clientData);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {

@@ -16,9 +16,7 @@ public class Main {
         String chouseSide=scan.next();
         abstractSide side;
         while(true){
-            System.out.println(chouseSide);
             if(chouseSide.equals("c")) {
-                System.out.println("doslo");
                 side = new ClientSide();
                 try {
                     side.inputData();

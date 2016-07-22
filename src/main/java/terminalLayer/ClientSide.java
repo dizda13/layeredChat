@@ -32,7 +32,6 @@ public class ClientSide extends abstractSide {
         while(true) {
             System.out.println("Type message");
             String message = new String(scan.nextLine());
-            input.toJSON(message);
             try {
                 input.toJSON(message);
             } catch (ExecutionException e) {

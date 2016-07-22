@@ -50,6 +50,7 @@ public class JSONparse {
     public void fromJSON(String jsonMsg) throws ExecutionException, InterruptedException {
         JSONObject json = new JSONObject(jsonMsg);
         client.printMsg(json.getString("Username"),json.getString("Message"));
+        //client.printMsg(user,jsonMsg);
     }
 
     public void sendStatus(String status){
