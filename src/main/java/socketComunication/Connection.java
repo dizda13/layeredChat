@@ -48,6 +48,7 @@ public class Connection implements  ISocketComunication {
     public void closeConnection() throws IOException {
         connected=false;
         socket.close();
+        iTransferLayer.sendStatus("By by...");
     }
 
 
@@ -102,10 +103,16 @@ public class Connection implements  ISocketComunication {
 
 
                     } catch (IOException e) {
-                            break;
+                        if(connected==true){
+                            try {
+                                closeConnection();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                        break;
                         }
                     }
-            iTransferLayer.sendStatus("By by...");
 
             }
 
