@@ -33,12 +33,20 @@ public class JSONtranslator implements ITransferLayer {
         iSocketComunication.setConnectionParametars(port);
     }
 
+    public void sendEndConnectionSignal() {
+        try {
+            iSocketComunication.closeConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void sendStatus(String status){
         iConsoleLayer.printStatus(status);
     }
 
 
-    public void toJSON(String msg, String user) {
+    public void toJSON(String user, String msg) {
         String jsonStr=new String("{\"Username\":\""+user+"\",\"Message\":\""+msg+"\"}");
 
         iSocketComunication.sendLine(jsonStr);

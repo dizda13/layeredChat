@@ -45,6 +45,7 @@ public class ClientSide implements IConsoleLayer {
                 message = new String(scan.nextLine());
                 iTransferLayer.toJSON(user, message);
             }
+            iTransferLayer.sendEndConnectionSignal();
 
     }
 

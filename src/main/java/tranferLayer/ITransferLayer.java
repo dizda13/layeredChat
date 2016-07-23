@@ -16,4 +16,5 @@ public interface ITransferLayer {
     public void setISocketComunication(ISocketComunication iSocketComunication);
     public void sendConectionParamtars(String ip,String port) throws IOException;
     public void sendConectionParamtars(String port) throws IOException;
+    public void sendEndConnectionSignal();
 }
