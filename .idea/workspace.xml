@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80945e69-024f-4fd0-b5c0-d235b543f34c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/socketComunication/Connection.java" afterPath="$PROJECT_DIR$/src/main/java/socketComunication/Connection.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/MainClient.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/MainServer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/consoleLayer/ClientSide.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/consoleLayer/IConsoleLayer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/consoleLayer/ServerSide.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/databaseLayer/Database.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/databaseLayer/MsgToDb.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/socketComunication/Connection$reciver.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/socketComunication/Connection.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/socketComunication/ISocketComunication.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/tranferLayer/ITransferLayer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/tranferLayer/JSONtranslator.class" afterPath="" />
     </list>
     <ignored path="chatLayered.iws" />
     <ignored path=".idea/workspace.xml" />
