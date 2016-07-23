@@ -31,12 +31,15 @@ public class Connection implements  ISocketComunication {
     }
 
     public void setConnectionParametars(String port) throws IOException {
+        ip="";
         this.port=port;
+        connected=true;
         connectServer();
     }
 
     public void setConnectionParametars(String ip, String port) throws IOException {
         this.ip=ip;
+        connected=true;
         this.port=port;
         connect();
     }
@@ -44,6 +47,7 @@ public class Connection implements  ISocketComunication {
 
     public void closeConnection() throws IOException {
         connected=false;
+        socket.close();
     }
 
 
@@ -99,9 +103,21 @@ public class Connection implements  ISocketComunication {
 
 
                     } catch (IOException e) {
+                        try {
+                            closeConnection();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                         iTransferLayer.sendStatus(e.getMessage());
                         e.printStackTrace();
                     }
+                    try {
+                        closeConnection();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    iTransferLayer.sendStatus("By by...");
 
                 }
             }
