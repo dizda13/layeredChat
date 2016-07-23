@@ -43,7 +43,9 @@ public class ClientSide implements IConsoleLayer {
             while (!message.equals("-1")) {
                 System.out.println("Type message/ -1 close");
                 message = new String(scan.nextLine());
-                iTransferLayer.toJSON(user, message);
+                if(!message.equals("-1"))
+                    iTransferLayer.toJSON(user, message);
+
             }
             iTransferLayer.sendEndConnectionSignal();
 

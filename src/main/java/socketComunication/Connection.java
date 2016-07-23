@@ -47,8 +47,15 @@ public class Connection implements  ISocketComunication {
 
     public void closeConnection() throws IOException {
         connected=false;
+        //sendLine("stop");
         socket.close();
         iTransferLayer.sendStatus("By by...");
+    }
+
+    public void closeSecondSide() throws IOException {
+        connected=false;
+        socket.close();
+        iTransferLayer.sendStatus("Connection closed by by...");
     }
 
 
@@ -97,9 +104,16 @@ public class Connection implements  ISocketComunication {
                         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                         clientData = reader.readLine();
+                        /*if(clientData!=null)
+                            System.out.println(clientData);
+                        if(clientData.equals("stop")){
+                            closeSecondSide();
+                            break;
+                        }*/
 
                         if (clientData != null)
                             iTransferLayer.fromJSON(clientData);
+
 
 
                     } catch (IOException e) {
