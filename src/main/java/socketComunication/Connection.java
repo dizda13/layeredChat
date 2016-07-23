@@ -89,9 +89,8 @@ public class Connection implements  ISocketComunication {
     public class reciver implements Runnable{
 
         public void run() {
-            while (true) {
+            while (connected) {
                 BufferedReader reader;
-                if(connected) {
                     String clientData;
                     try {
                         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -111,16 +110,15 @@ public class Connection implements  ISocketComunication {
                         iTransferLayer.sendStatus(e.getMessage());
                         e.printStackTrace();
                     }
-                    try {
-                        closeConnection();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
 
-                    iTransferLayer.sendStatus("By by...");
-
-                }
             }
+            try {
+                closeConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            iTransferLayer.sendStatus("By by...");
 
         }
     }
