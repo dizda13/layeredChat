@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 
-public class Database {
+public class Database implements IDatabaseLayer {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static String DB_URL  = "jdbc:mysql://localhost/socketchat";;
     static String USER ="root";
