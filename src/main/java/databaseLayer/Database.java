@@ -12,10 +12,13 @@ import java.util.ArrayList;
 
 
 public class Database implements IDatabaseLayer {
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static String DB_URL  = "jdbc:mysql://localhost/socketchat";;
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+
     static String USER ="root";
     static String PASS ="1234";
+    static String DBNAME = "socketchat";
+    static String DB_URL  = "jdbc:mysql://localhost/"+ DBNAME +"?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=America/New_York";
+
     static Boolean IsTableCreated = true; //  PROMIJENITI VRIJEDNOST NA FALSE
 
 
@@ -34,7 +37,7 @@ public class Database implements IDatabaseLayer {
     public void start() {
         if(conn == null) {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
 
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
