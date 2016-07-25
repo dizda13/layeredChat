@@ -31,7 +31,6 @@ public class Database implements IDatabaseLayer {
 
 
     // USPOSTAVLJANJE KONEKCIJE SA BAZOM
-
     public void start() {
         if(conn == null) {
             try {

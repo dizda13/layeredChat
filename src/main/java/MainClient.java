@@ -1,6 +1,8 @@
 import consoleLayer.ClientSide;
 import consoleLayer.IConsoleLayer;
 import consoleLayer.ServerSide;
+import databaseLayer.Database;
+import databaseLayer.IDatabaseLayer;
 import socketComunication.Connection;
 import socketComunication.ISocketComunication;
 import tranferLayer.ITransferLayer;
@@ -17,11 +19,13 @@ public class MainClient {
         IConsoleLayer iConsoleLayer=new ClientSide();
         ITransferLayer iTransferLayer=new JSONtranslator();
         ISocketComunication iSocketComunication=new Connection();
+        IDatabaseLayer iDatabaseLayer=new Database();
 
         iConsoleLayer.setITransferLayer(iTransferLayer);
 
         iTransferLayer.setIConsoleLayer(iConsoleLayer);
         iTransferLayer.setISocketComunication(iSocketComunication);
+        iTransferLayer.setIDatabaseLayer(iDatabaseLayer);
 
         iSocketComunication.setITransferLayer(iTransferLayer);
 

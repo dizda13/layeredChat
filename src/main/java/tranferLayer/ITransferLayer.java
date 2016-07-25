@@ -1,6 +1,7 @@
 package tranferLayer;
 
 import consoleLayer.IConsoleLayer;
+import databaseLayer.IDatabaseLayer;
 import socketComunication.ISocketComunication;
 
 import java.io.IOException;
@@ -17,4 +18,5 @@ public interface ITransferLayer {
     public void sendConectionParamtars(String ip,String port) throws IOException;
     public void sendConectionParamtars(String port) throws IOException;
     public void sendEndConnectionSignal();
+    public void setIDatabaseLayer(IDatabaseLayer iDatabaseLayer);
 }
