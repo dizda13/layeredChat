@@ -97,11 +97,16 @@ public class Connection implements  ISocketComunication {
     public class reciver implements Runnable{
 
         public void run() {
+            BufferedReader reader = null;
+            try {
+
+                reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             while (connected) {
-                BufferedReader reader;
                     String clientData;
                     try {
-                        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                         clientData = reader.readLine();
                         /*if(clientData!=null)
